@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<script type="text/javascript">
+    var instance = 1;
+     
+    function newUpload(){
+    instance++;
+    var newInput = document.createElement("INPUT");
+    newInput.type = "text";
+    newInput.name = "type" + instance;
+    newInput.style.display = 'block';
+    element = document.getElementById("btnAdd");
+    document.getElementById("TYPE").insertBefore(newInput, element);
+    }
+    
+    </script>
+
+	<title>File Validator</title>
+</head>
+
+<body>
+	
+	<h1>File Validator</h1>
+
+	<form enctype="multipart/form-data" action="http://localhost/cgi-bin/SaveFile.cgi" method="post">
+	              
+		<p>gff file: <input type="file" name="gffFile"   /></p>
+		<p>fasta file: <input type="file" name="seqFile" /></p>
+		<p><input type="checkbox" name="optionalErr"     >Include input line in errors.</p>
+		
+		<br/>
+		
+		<div id = "TYPE">   
+		<h2>Type Hierarchy:</h2>
+		<input type="text" name="type1" style="display: block;">
+		<input type="button" id="btnAdd" value="Additional Type" onclick="newUpload();" />
+
+		</div>
+		<p><input type="submit" value="Submit"           /></p>
+	
+	</form>
+	
+   
+</body>
+</html>
