@@ -79,6 +79,7 @@ def main():
 		sys.exit(-1)
 	
 	suf = '_DT_' + str(datetime.datetime.fromtimestamp(time.time())) +'.txt'
+	suf.replace(" ","")
 	dir = '/Library/WebServer/trash/'
 	
 	newErrors = tempfile.NamedTemporaryFile(suffix=suf, prefix='Errors_', dir=dir, delete=False)
