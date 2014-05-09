@@ -1,0 +1,14 @@
+##gff-version 3
+Phabio_draft	Group	contig	1	54027	200	+	.	Name=Phabio_draft
+Phabio_draft	Group	gene	43	371	200	+	.	ID=Phabio.1;Name=Phabio.1
+Phabio_draft	Group	mRNA	43	371	200	+	.	ID=Phabio.1.mRNA;Parent=Phabio.1
+Phabio_draft	Group	exon	43	371	200	+	.	ID=Phabio.1.exon;Parent=Phabio.1.mRNA
+Phabio_draft	Group	gene	445	699	200	+	.	ID=Phabio.2;Name=Phabio.2
+Phabio_draft	Group	mRNA	445	699	200	+	.	ID=Phabio.2.mRNA;Parent=Phabio.2
+Phabio_draft	Group	exon	445	699	200	+	.	ID=Phabio.2.exon;Parent=Phabio.2.mRNA
+Phabio_draft	Group	gene	671	2158	200	+	.	ID=Phabio.3;Name=Phabio.3
+Phabio_draft	Group	mRNA	671	2158	200	+	.	ID=Phabio.3.mRNA;Parent=Phabio.3
+Phabio_draft	Group	exon	671	2158	200	+	.	ID=Phabio.3.exon;Parent=Phabio.3.mRNA
+Phabio_draft	Group	gene	text	25148	200	-	.	ID=Phabio.25;Name=Phabio.25
+Phabio_draft	Group	mRNA	24951	text	200	-	.	ID=Phabio.25.mRNA;Parent=Phabio.25
+Phabio_draft	Group	exon	24951	25148	200	-	.	ID=Phabio.25.exon;Parent=Phabio.25.mRNA
