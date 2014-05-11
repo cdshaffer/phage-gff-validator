@@ -1,26 +1,26 @@
 ##gff-version 3
-Phabio_draft	Group	contig	1	54027	200	+	.	Name=Phabio_draft
-Phabio_draft	Group	gene	41	373	200	+	.	ID=Phabio.1;Name=Phabio.1;Note=first gene correct
-Phabio_draft	Group	mRNA	41	373	200	+	.	ID=Phabio.1.mRNA;Parent=Phabio.1
-Phabio_draft	Group	exon	41	373	200	+	.	ID=Phabio.1.exon;Parent=Phabio.1.mRNA
-Phabio_draft	Group	gene    445	699	200	+	.	ID=Phabio.2;Name=Phabio.2;Note=tab error
-Phabio_draft	Group	mRNA	44s	699	200	+	.	ID=Phabio.2.mRNA;Parent=Phabio.2;Note=left not int
-Phabio_draft	Group	exon	445	69s	200	+	.	ID=Phabio.2.exon;Parent=Phabio.2.mRNA;Note=right not int
-Phabio_draft!	Group	gene	671	2158	200	+	.	ID=Phabio.3;Name=Phabio.3;Note=Illegal char column 1
-Phabio_draft	Group!	mRNA	671	2158	200	+	.	ID=Phabio.3.mRNA;Parent=Phabio.3;Note=illegal char column 2
-Phabio_draft	Group	Exon	671	2158	200	+	.	ID=Phabio.3.exon;Parent=Phabio.3.mRNA;Note=not valid type
-Phabio_draft	Group	gene	-24951	25148	200	-	.	ID=Phabio.25;Name=Phabio.25;Note=negative in column 3
-Phabio_draft	Group	mRNA	25148	24951	200	-	.	ID=Phabio.25.mRNA;Parent=Phabio.25;Note=left > right
-Phabio_draft	Group	exon	24951	25148	20s	-	.	ID=Phabio.25.exon;Parent=Phabio.25.mRNA;Note=column 5 not int
-Phabio_draft	Group	gene	34117	34440	200	.	.	ID=Phabio.40;Name=Phabio.40;Note=invalid strand indicator
-Phabio_draft	Group	mRNA	34117	34440	200	+	2	ID=Phabio.40.mRNA;Parent=Phabio.40;Note=invalid phase value
-Phabio_draft	Group	exon	34117	34440	200	+	.	ID=Phabio.40.exon,Parent=Phabio.40.mRNA;Note=invalid attr separator
-Phabio_draft	Group	gene	34501	35367	200	+	.	ID=Phabio.41;Name=Phabio.41;Note=Illegal char in column 9!
-Phabio_draft	Group	mRNA	34501	35367	200	+	.	ID=Phabio.41.mRNA;=Phabio.41;Note=Missing Key
-Phabio_draft	Group	exon	34501	35367	200	+	.	ID=Phabio.41.exon;Parent=;Note=Missing value
-Phabio_draft	Group	gene	49874	50038	200	+	.	ID=Phabio.73;Name=Phabio.73;Note=extra semicolon;;
-Phabio_draft	Group	mRNA	49874	50038	200	+	.	Parent=Phabio.73;Note=Missing ID
-Phabio_draft	Group	exon	49874	50038	200	+	.	ID=Phabio.73.exon;Parent=Phabio.73.mRNA
-Phabio_draft	Group	gene	50372	50788	200	+	.	ID=Phabio.74;Note=Gene missing Name
-Phabio_draft	Group	mRNA	50372	50788	200	+	.	ID=Phabio.74.mRNA;Note=mRNA missing parent
-Phabio_draft	Group	exon	50372	50788	200	+	.	ID=Phabio.74.exon;Parent=Phabio.74.mRNA;Note=essentially OK
+Pha_draft	Group	contig	1	54027	200	+	.	Name=Pha_draft
+Pha_draft	Group	gene	41	373	200	+	.	ID=Pha.1;Name=Pha.1;Note=first gene correct
+Pha_draft	Group	mRNA	41	373	200	+	.	ID=Pha.1.mRNA;Parent=Pha.1
+Pha_draft	Group	exon	41	373	200	+	.	ID=Pha.1.exon;Parent=Pha.1.mRNA
+Pha_draft	Group	gene    445	699	200	+	.	ID=Pha.2;Name=Pha.2;Note=tab error
+Pha_draft	Group	mRNA	44s	699	200	+	.	ID=Pha.2.mRNA;Parent=Pha.2;Note=left not int
+Pha_draft	Group	exon	445	69s	200	+	.	ID=Pha.2.exon;Parent=Pha.2.mRNA;Note=right not int
+Pha_draft!	Group	gene	671	2158	200	+	.	ID=Pha.3;Name=Pha.3;Note=Illegal char colm 1
+Pha_draft	Group!	mRNA	671	2158	200	+	.	ID=Pha.3.mRNA;Parent=Pha.3;Note=illegal char colm 2
+Pha_draft	Group	Exon	671	2158	200	+	.	ID=Pha.3.exon;Parent=Pha.3.mRNA;Note=not valid type
+Pha_draft	Group	gene	-24951	25148	200	-	.	ID=Pha.25;Name=Pha.25;Note=negative in colm 3
+Pha_draft	Group	mRNA	25148	24951	200	-	.	ID=Pha.25.mRNA;Parent=Pha.25;Note=left .gt right
+Pha_draft	Group	exon	24951	25148	20s	-	.	ID=Pha.25.exon;Parent=Pha.25.mRNA;Note=colm 6 not int
+Pha_draft	Group	gene	34117	34440	200	.	.	ID=Pha.40;Name=Pha.40;Note=invalid strand indicator
+Pha_draft	Group	mRNA	34117	34440	200	+	2	ID=Pha.40.mRNA;Parent=Pha.40;Note=invalid phase value
+Pha_draft	Group	exon	34117	34440	200	+	.	ID=Pha.40.exon.Parent=Pha.40.mRNA;Note=not semicolon
+Pha_draft	Group	gene	34501	35367	200	+	.	ID=Pha.41;Name=Pha.41;Note=Illegal char in colm 9!
+Pha_draft	Group	mRNA	34501	35367	200	+	.	ID=Pha.41.mRNA;=Pha.41;Note=Missing Parent Key
+Pha_draft	Group	exon	34501	35367	200	+	.	ID=Pha.41.exon;Parent=;Note=Missing value
+Pha_draft	Group	gene	49874	50038	200	+	.	ID=Pha.73;Name=Pha.73;Note=extra semicolon;;
+Pha_draft	Group	mRNA	49874	50038	200	+	.	Parent=Pha.73;Note=Missing ID
+Pha_draft	Group	exon	49874	50038	200	+	.	ID=Pha.73.exon;Parent=Pha.73.mRNA
+Pha_draft	Group	gene	50372	50788	200	+	.	ID=Pha.74;Note=Gene missing Name
+Pha_draft	Group	mRNA	50372	50788	200	+	.	ID=Pha.74.mRNA;Note=mRNA missing parent
+Pha_draft	Group	exon	50372	50788	200	+	.	ID=Pha.74.exon;Parent=Pha.74.mRNA;Note=extra _tab_	d
