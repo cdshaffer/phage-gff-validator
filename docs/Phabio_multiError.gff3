@@ -24,3 +24,9 @@ Pha_draft	Group	exon	49874	50038	200	+	.	ID=Pha.73.exon;Parent=Pha.73.mRNA
 Pha_draft	Group	gene	50372	50788	200	+	.	ID=Pha.74;Note=Gene missing Name
 Pha_draft	Group	mRNA	50372	50788	200	+	.	ID=Pha.74.mRNA;Note=mRNA missing parent
 Pha_draft	Group	exon	50372	50788	200	+	.	ID=Pha.74.exon;Parent=Pha.74.mRNA;Note=extra _tab_	d
+Phabio_draft	Group	gene	52648	53118	200	+	.	ID=Phabio.77;Name=Phabio.77;Note=normal
+Phabio_draft	Group	mRNA	52648	53118	200	+	.	ID=Phabio.77.mRNA;Parent=Phabio.77
+Phabio_draft	Group	exon	52648	53118	200	+	.	ID=Phabio.77.exon;Parent=Phabio.77.mRNA
+Phabio_draft	Group	gene	53324	53935	200	+	.	ID=Phabio.78;Name=Phabio.78;Note=normal
+Phabio_draft	Group	mRNA	53324	53935	200	+	.	ID=Phabio.78.mRNA;Parent=Phabio.78
+Phabio_draft	Group	exon	53324	53935	200	+	.	ID=Phabio.78.exon;Parent=Phabio.78.mRNA
