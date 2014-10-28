@@ -48,38 +48,17 @@ def validSource(text):
 def validType(text, validTypes=None):
     """
     Checks a string to make sure it is a valid entry for column 3 of gff file, for this column should be feature type.
-    For phage this should be one of types typically ['gene','mRNA','exon']
+    For phage this should be one of types ['gene','mRNA','exon']
     
     Parameters:
     - 'text': string value of the entry in column 2 to check
-    - 'validTypes': List of valid types for checking
+    - 'validTypes': List of valid types for checking if not the default 3
     """
     if validTypes is None:
-        validTypes = {'gene','mRNA','exon'}
+        validTypes = ['gene','mRNA','exon']
     
     return text in validTypes
 
-def validCoordinate(coord):
-    """
-    Checks a coordinate (entries in column 4 and 5), should be a positive integer
-    
-    Parameters:
-    - 'coord': coordinate from column 4 or 5
-    """
-    try:
-        x = int(coord)
-    except:
-        isCoordinate = False
-        pass
-    else:
-        if x > 0:
-            print "tested positive"
-            isCoordinate = True
-        else:
-            print "tested negative"
-            isCoordinate = False
-    
-    return isCoordinate
 
 def validScore(score):
     """
@@ -169,7 +148,7 @@ def validAttributes(attributes):
 
 def charCheck(str, search=re.compile(r'[^a-zA-Z0-9.=;_]').search):
     """
-    Checks a string for characters not a-zA-Z0-9.=; and returns True if such a character is
+    Checks a string for characters NOT a-zA-Z0-9.=; and returns True if invalid character is
     found.
 
     Parameters:
@@ -177,6 +156,16 @@ def charCheck(str, search=re.compile(r'[^a-zA-Z0-9.=;_]').search):
     -'search': default search all characters in valid set
     """
     return bool(search(str))
+
+def validCoordinate(coord):
+    """
+    Checks a coordinate (entries in column 4 and 5), should be a positive integer
+    
+    Parameters:
+    - 'coord': coordinate from column 4 or 5
+    """
+    
+    return not bool(charCheck(coord, search=re.compile(r'[^0-9]').search))
 
 def validGene(seq, line):       
     """
