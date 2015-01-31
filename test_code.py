@@ -101,3 +101,18 @@ def test_validCoordinate_4():
     'passes with positive integer'
     result = validCoordinate('100')
     assert result == True
+    
+def test_validCoordinates_1():
+    'fails with left larger than right'
+    result = validCoordinates('5','4')
+    assert result == False
+
+def test_validCoordinates_2():
+    'passes with left equal to right'
+    result = validCoordinates('5','5')
+    assert result == True
+    
+def test_validCoordinates_3():
+    'passes with left smaller than right'
+    result = validCoordinates('4','5')
+    assert result == True

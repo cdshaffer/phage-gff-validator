@@ -55,7 +55,7 @@ def validType(text, validTypes=None):
     - 'validTypes': List of valid types for checking if not the default 3
     """
     if validTypes is None:
-        validTypes = ['gene','mRNA','exon']
+        validTypes = {'gene','mRNA','exon'}
     
     return text in validTypes
 
@@ -159,13 +159,29 @@ def charCheck(str, search=re.compile(r'[^a-zA-Z0-9.=;_]').search):
 
 def validCoordinate(coord):
     """
-    Checks a coordinate (entries in column 4 and 5), should be a positive integer
+    Checks a coordinate (entries in column 4 or 5), should be a positive integer
     
     Parameters:
     - 'coord': coordinate from column 4 or 5
     """
     
     return not bool(charCheck(coord, search=re.compile(r'[^0-9]').search))
+
+def validCoordinates(leftCoord, rightCoord):
+    """
+    Checks a coordinates (entries in column 4 and 5), should be a positive integers
+    and the left Coordinate should be smaller than the right Coordinate
+    
+    Parameters:
+    - 'leftCoord':  coordinate from column 4
+    - 'rightCoord': coordinate from column 5
+
+    """
+    
+    
+    return (validCoordinate(leftCoord) and validCoordinate(rightCoord) and leftCoord <= rightCoord)
+        
+
 
 def validGene(seq, line):       
     """
