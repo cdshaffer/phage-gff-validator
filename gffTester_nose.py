@@ -55,7 +55,7 @@ def validType(text, validTypes=None):
     - 'validTypes': List of valid types for checking if not the default 3
     """
     if validTypes is None:
-        validTypes = {'gene','mRNA','exon'}
+        validTypes = {'gene','mRNA','exon', 'contig'}
     
     return text in validTypes
 
@@ -184,10 +184,9 @@ def validCoordinates(leftCoord, rightCoord):
 
 
 def printFailureMessage(failType):
-    print "##### Fatal Error #####"
-    print failType + "failed. No other tests run."
+    print "\n##### Fatal Error #####"
+    print failType + " failed. No other tests run."
     print """
-    
+================================ End Results ================================        
 Computer messages follow below OK to ignore, you should fix file and try again.
-================================ End Results ================================    
     """
