@@ -116,21 +116,24 @@ def validAttributes(attributes):
     if attributes == '':
         return True
     
-     #checking for invalid characters, spaces OK in column 9 values so remove any before checking with charCheck
+    #checking for invalid characters goes here if any found
+    
+    if bool(charCheck(attributes, search=re.compile(r'[^a-zA-Z0-9.=;_ ]').search)):
+        return False
+    
+    
+    #ok go ahead and split into the underlyine key=value items 
 
-        
-    #ok go ahead and split into the underlyine key=value items    
     attrPairs = attributes.split(";")   #list of each attribute pair
     
     validity = True
     
     for attrPair in attrPairs:
-        print attrPair
         if attrPair == '':                  #this will happen if file had two ;; in a row
             continue
             
         if attrPair.count('=') != 1:        #for each Key=value there must be only one "="
-            validity = False
+            return False
         
         attrKey, attrValue = attrPair.split('=')
         
@@ -177,120 +180,14 @@ def validCoordinates(leftCoord, rightCoord):
     - 'rightCoord': coordinate from column 5
 
     """
-    
-    
-    return (validCoordinate(leftCoord) and validCoordinate(rightCoord) and leftCoord <= rightCoord)
-        
+    return (validCoordinate(leftCoord) and validCoordinate(rightCoord) and int(leftCoord) <= int(rightCoord))
 
 
-def validGene(seq, line):       
+def printFailureMessage(failType):
+    print "##### Fatal Error #####"
+    print failType + "failed. No other tests run."
+    print """
+    
+Computer messages follow below OK to ignore, you should fix file and try again.
+================================ End Results ================================    
     """
-    Checks if coordinates of sequence given is define a proper gene.
-    
-    
-    Proper gene:
-    - can be translated to a protein.
-    - has one stop codon and it is the last codon.
-    - begins with a valid start codon [ATG, GTG, CTG].
-    
-    Parameters:
-    -'Seq': string nucleotide sequence of entire phage.
-    -'line': single line in gff3 format for checking.
-    """
-    
-    leftCoordinate= int(line.split("\t")[3])
-    rightCoordinate= int(line.split("\t")[4])
-    strand = line.split("\t")[6]
-    geneSeq = seq[leftCoordinate-1:rightCoordinate]   #not really the gene for negative strand genes but good enough
-    
-    if  strand == "+":
-        firstCodon = geneSeq[:3].upper()
-        lastCodon = geneSeq[-3:].upper()
-        startCodons = ['ATG', 'TTG', 'GTG']
-        stopCodons = ['TAA', 'TAG', 'TGA']
-    else:
-        firstCodon = geneSeq[-3:].upper()
-        lastCodon = geneSeq[:3].upper()
-        startCodons = ['CAT', 'CAA', 'CAC']   #reverse complement of the start codons
-        stopCodons = ['TTA', 'CTA', 'TCA']   #reverse complement of the stop codons
-
-    #first make sure the values of leftCoordinate and rightCoordinate are OK
-    
-    if (leftCoordinate >= len(seq)) or (rightCoordinate > len(seq)):  #GFF is 1 based counting 
-        return False
-    
-    if (rightCoordinate - leftCoordinate) < 30:                       #minimum gene size for this check is 10 a.a.
-        return False
-    
-    if len(geneSeq)%3 != 0:
-        return False
-    
-    if firstCodon not in startCodons:
-        return False
-    
-    if lastCodon not in stopCodons:
-        return False
-    
-    stopCodonCount = countStopCodons(geneSeq,strand)
-    if  stopCodonCount > 1:
-        return False
-    
-    return True
-
-def fastaRead(fasta_File):
-    """
-    Reads in a nucleotide sequence from a text file in .fasta format.
-
-    Parameters:
-    -'fasta_File': uploaded text file in .fasta format
-
-    Output:
-    -'seq': string of a nucleotide sequence.
-    """
-
-    seq = []
-    try:
-        f1 = open(fasta_File, "r")
-    except:
-        return "Error: unable to read fasta file."
-    
-    for line in f1:
-        line = line.rstrip()
-        if line.startswith(">"):
-            continue
-        else:
-            seq.append(line)
-
-    f1.close()
-    return ''.join(seq)
-
-def countStopCodons(seq, strand):
-    """
-    Used to count the number of stop codons in a given sequence
-
-    Parameters:
-    -'seq': nucleotide sequence of plus strand.
-    -'strand': indication if gene is on the plus or minus strand
-
-    Output:
-    -'count': total number of stop codons found in the sequence.
-    """
-    
-    count = 0
-    
-    if strand == "+":
-        stopCodons = ['TTA', 'TAG', 'TGA']
-    else:
-        stopCodons = ['TAA', 'CTA', 'TCA']   ##reverse complement of stop codons
-        
-    #now create a list of all codons using list comprehension, this only works well if len%3 == 0
-    if strand == "+":
-        codons=[seq[x:x+3] for x in range(0,len(seq),3)]
-    else:
-        codons=[seq[x:x+3] for x in range(-3,-len(seq),-3)] #works for all but first codon becuase string[-3:0]=''
-        codons[0] = seq[-3:]                                #so fudge in the "first" codon on the negative side
-    
-    for stop in stopCodons:
-        count += codons.count(stop)
-        
-    return count

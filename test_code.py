@@ -57,53 +57,53 @@ def test_validTabStructure_3():
     assert result == False
     
 def test_validType_1():
-    'passes with "gene"'
+    'Type passes with "gene"'
     result = validType('gene')
     assert result == True
 
 def test_validType_2():
-    'passes with "mRNA"'
+    'Type passes with "mRNA"'
     result = validType('mRNA')
     assert result == True
 
 def test_validType_3():
-    'passes with "exon"'
+    'Type passes with "exon"'
     result = validType('exon')
     assert result == True
     
 def test_validType_4():
-    'fails with mrna'
+    'Type fails with mrna'
     result = validType('mrna')
     assert result == False
     
 def test_validType_5():
-    'passes with specified list'
+    'Type passes with specified list'
     result = validType('mrna', ['mRNA', 'mrna'])
     assert result == True
     
 
 def test_validCoordinate_1():
-    'fails with text as coordinate'
+    'Coord fails with text as coordinate'
     result = validCoordinate('a')
     assert result == False
 
 def test_validCoordinate_2():
-    'fails with float'
+    'Coord fails with float'
     result = validCoordinate('2.0')
     assert result == False
     
 def test_validCoordinate_3():
-    'fails with negative int'
+    'Coord fails with negative int'
     result = validCoordinate('-3')
     assert result == False
     
 def test_validCoordinate_4():
-    'passes with positive integer'
+    'Coord passes with positive integer'
     result = validCoordinate('100')
     assert result == True
     
 def test_validCoordinates_1():
-    'fails with left larger than right'
+    'Coordinates fails with left larger than right'
     result = validCoordinates('5','4')
     assert result == False
 
@@ -115,4 +115,34 @@ def test_validCoordinates_2():
 def test_validCoordinates_3():
     'passes with left smaller than right'
     result = validCoordinates('4','5')
+    assert result == True
+    
+def test_validAttributes_1():
+    'Attributes passes with null string'
+    result = validAttributes("")
+    assert result == True
+
+def test_validAttributes_2():
+    'Attributes passes a=b'
+    result = validAttributes("a=b")
+    assert result == True
+
+def test_validAttributes_3():
+    'attrubutes passes with "a=b;"'
+    result = validAttributes("a=b;")
+    assert result == True
+
+def test_validAttributes_4():
+    'Attributes failes with "a=bc=d"'
+    result = validAttributes("a=bc=d")
+    assert result == False
+    
+def test_validAttributes_5():
+    'attrubutes passes with "a=b;c=d"'
+    result = validAttributes("a=b;c=d")
+    assert result == True
+
+def test_validAttributes_6():
+    'attrubutes passes with "af=b f;c=d"'
+    result = validAttributes("af=b f;c=d")
     assert result == True
