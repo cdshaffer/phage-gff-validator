@@ -1,13 +1,15 @@
 import re,sys
 
-def validHeader (line):
+def validHeader(line):
     """
     Return True if line is a valid gff3 header.
     
     Parameters:
     - 'line' - line to check
     """
-    if line == "##gff-version 3\n":
+    if len(line) != 16:
+        return False
+    elif line.strip() == "##gff-version 3":
         return True
     else:
         return False
@@ -20,6 +22,7 @@ def validTabStructure(line):
     - 'line': line to check
     """
     theLine = line.strip().split("\t")  #strip off extra charachters and split the line on tab
+
     if len(theLine) != 9:               # 9 columns in a gff file, so return False if not exactly 9
         return False
     else:
@@ -103,17 +106,16 @@ def validPhase(phase):
     return phase in validValues
 
 def validAttributes(attributes):
-    """
+    '''
     Checks a column 9 entry, should be series of key=value entries separated by ; 
     It is OK to have spaces in the values entry but not the Key value
     
     
     Parameters:
     - 'attributes': entire entry from column 9
-    """
-    
+    '''
     #ok to have a null string
-    if attributes == '':
+    if attributes == '.':
         return True
     
     #checking for invalid characters goes here if any found
@@ -147,7 +149,7 @@ def validAttributes(attributes):
         if charCheck(attrValue.replace(' ','')):
             validity = False
             
-    return validity
+    return True
 
 def charCheck(str, search=re.compile(r'[^a-zA-Z0-9.=;_]').search):
     """
