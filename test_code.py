@@ -15,9 +15,7 @@ def validStrand(strand):
 def validPhase(phase):
 def validAttributes(attributes):
 def charCheck(str, search=re.compile(r'[^a-zA-Z0-9.=;_]').search):
-def validGene(seq, line):       
-def fastaRead(fasta_File):
-def countStopCodons(seq, strand):
+
 '''
 
 def test_validHeader_1():
@@ -35,12 +33,12 @@ def test_validHeader_3():
     result = validHeader('##gff-version 3\t\n')
     assert result == False
 
-    
 def test_validHeader_4():
     'garbled header fails'
     result = validHeader('##gff-Version 3\n')
     assert result == False
     
+
 def test_validTabStructure_1():
     'fails 7 tab structure'
     result = validTabStructure("1\t2\t3\t4\t5\t6\t7\t8\n")
@@ -102,6 +100,11 @@ def test_validCoordinate_4():
     result = validCoordinate('100')
     assert result == True
     
+def test_validCoordinate_5():
+    'Coord fails with digits with space'
+    result = validCoordinate('1 2')
+    assert result == False
+    
 def test_validCoordinates_1():
     'Coordinates fails with left larger than right'
     result = validCoordinates('5','4')
@@ -134,7 +137,7 @@ def test_validAttributes_3():
     assert result == True
 
 def test_validAttributes_4():
-    'Attributes failes with "a=bc=d"'
+    'Attributes fails with "a=bc=d"'
     result = validAttributes("a=bc=d")
     assert result == False
     
@@ -149,8 +152,8 @@ def test_validAttributes_6():
     assert result == True
 
 def test_validAttributes_7():
-    'attrubutes fails with blank key "a=b;=b"'
-    result = validAttributes("a=b;=b")
+    'attrubutes fails with blank key "a*b=c"'
+    result = validAttributes("a*b=c")
     assert result == False
 
 def test_validAttributes_8():
@@ -158,7 +161,51 @@ def test_validAttributes_8():
     result = validAttributes("key&=ab")
     assert result == False
 
+def test_validAttributes_9():
+    'attrubutes fails if missing = "ab"'
+    result = validAttributes("ab")
+    assert result == False
+    
+def test_validAttributes_10():
+    'attrubutes fails if missing = in 2nd "a=b;ab"'
+    result = validAttributes("a=b;ab")
+    assert result == False
+    
+def test_validAttributes_11():
+    'attrubutes passes with 3 pairs "a=b;c=d;e=f"'
+    result = validAttributes("a=b;c=d;e=f")
+    assert result == True
 
+def test_validAttributes_12():
+    'attrubutes fails error in 3rd pair "a=b;c=d;e==f"'
+    result = validAttributes("a=b;c=d;e==f")
+    assert result == False
+
+def test_charCheck_1():
+    'charCheck give true for illegal & "a&f"'
+    result = charCheck("a&f")
+    assert result == True
+
+def test_charCheck_2():
+    'charCheck true for illegal space "a f"'
+    result = charCheck("a f")
+    assert result == True
+    
+def test_charCheck_3():
+    'charCheck gives false for simple text "abcdefghijklmnopqrstuvwxyz"'
+    result = charCheck("abcdefghijklmnopqrstuvwxyz")
+    assert result == False
+
+def test_charCheck_4():
+    'charCheck gives false for simple text "ABCDEFGHIJKLMNOPQRSTUVWXYZ"'
+    result = charCheck("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    assert result == False   
+    
+def test_charCheck_5():
+    'charCheck gives false for simple text "1234567890"'
+    result = charCheck("1234567890")
+    assert result == False
+    
 def test_parseAttributes_1():
     'Attribute test 1 single ID entry'
     returned = parseAttributes("ID=gene1")
