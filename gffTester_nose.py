@@ -192,3 +192,73 @@ def printFailureMessage(failType):
 ================================ End Results ================================        
 Computer messages follow below OK to ignore, you should fix file and try again.
     """
+    
+def createDNAMasterFile(gffFileContents):
+    """
+    Takes in a list of GFF lines, checks for headers and passes lines of type gene to parser.
+    Returns the complete text of DNA Master text file.
+    
+    Parameters:
+    - 'gffFileContents':  List of text entries, each element a line from GFF# file.
+    """
+    
+    text = ''
+    for wholeLine in gffFileContents:
+        line = wholeLine.strip().split("\t")
+        
+        if len(line) < 8:
+            continue
+        
+        if line[2] == 'gene':
+            entry = gene2CDS(line)
+            text += entry
+            
+        parseAttributes(line[8])
+            
+    epilog = "ORIGIN"
+    text += epilog
+        
+    return text
+            
+        
+def gene2CDS(line):
+    """
+    Takes in a single GFF entry and returns the corresponding DNA Master entry for the CDS line.
+    
+    Parameters:
+    - 'line':  List of entries from a single GFF entry.
+    """    
+    if line[6] == "+":
+        return "CDS " + line[3] + " - " + line[4] + "\n"
+    else:
+        return "CDS complement (" + line[3] + " - " + line[4] + ")\n"
+    
+def parseAttributes(attributes):
+    """
+    takes in the Attributes entry of the GFF. If there is an ID= or Name=
+    entry then create the /gene line. If there is a notes= entry then create
+    the /note line
+    """
+    #ok go ahead and split into the underlyine key=value items 
+
+    attrPairs = attributes.split(";")   #list of each attribute pair
+    
+    returnString = ""
+    
+    for attrPair in attrPairs:
+        attrKey = ""
+        attrValue = ""
+        
+        if len(attrPair.split('=')) == 2:
+            attrKey = attrPair.split("=")[0].lower()
+            attrValue =  attrPair.split("=")[1]
+        
+        if attrKey in ["id", "name"]:
+            returnString += '  /gene=' + attrValue + '\n'
+        if attrKey == "note":
+            if attrValue[0:1] == attrValue[-1:] == '"':
+                attrValue = attrValue[1:-1]
+            returnString += '    /note="' + attrValue + '"\n'
+    
+    print "return: " + returnString
+    return returnString

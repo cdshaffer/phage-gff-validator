@@ -116,6 +116,7 @@ def test_validCoordinates_3():
     'passes with left smaller than right'
     result = validCoordinates('4','5')
     assert result == True
+
     
 def test_validAttributes_1():
     'Attributes passes with null string'
@@ -146,3 +147,54 @@ def test_validAttributes_6():
     'attrubutes passes with "af=b f;c=d"'
     result = validAttributes("af=b f;c=d")
     assert result == True
+
+def test_validAttributes_7():
+    'attrubutes fails with blank key "a=b;=b"'
+    result = validAttributes("a=b;=b")
+    assert result == False
+
+def test_validAttributes_8():
+    'attrubutes fails with illegal character in key "key&=ab"'
+    result = validAttributes("key&=ab")
+    assert result == False
+
+
+def test_parseAttributes_1():
+    'Attribute test 1 single ID entry'
+    returned = parseAttributes("ID=gene1")
+    assert returned == '  /gene=gene1\n'
+
+def test_parseAttributes_2():
+    'Attribute test 2 single ID entry with semicolon'
+    returned = parseAttributes("ID=gene1;")
+    assert returned == '  /gene=gene1\n'
+    
+def test_parseAttributes_3():
+    'Attribute test 3 single Note entry with spaces'
+    returned = parseAttributes("Note=note note")
+    assert returned == '    /note="note note"\n'
+    
+def test_parseAttributes_4():
+    'Attribute test 4 single Note entry with semicolon'
+    returned = parseAttributes("Note=gene;")
+    assert returned == '    /note="gene"\n'
+    
+def test_parseAttributes_5():
+    'Attribute test 5 single Note entry preceded by ;'
+    returned = parseAttributes(";Note=gene2")
+    assert returned == '    /note="gene2"\n'
+    
+def test_parseAttributes_6():
+    'Attribute test 6 ID + Note entry'
+    returned = parseAttributes("ID=gene1;Note=note4")
+    assert returned == '  /gene=gene1\n    /note="note4"\n'
+    
+def test_parseAttributes_7():
+    'Attribute test 7 single Note entry with quotes'
+    returned = parseAttributes('Note="gene7"')
+    assert returned == '    /note="gene7"\n'
+    
+def test_parseAttributes_8():
+    'Attribute test 8 single id entry with quotes'
+    returned = parseAttributes('id="gene8"')
+    assert returned == '  /gene="gene8"\n'
